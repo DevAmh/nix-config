@@ -16,4 +16,4 @@ in
 slam.evalSlam {
   modules = modules;
   specialArgs = specialArgs;
-};
+}
