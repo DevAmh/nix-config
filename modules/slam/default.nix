@@ -7,7 +7,7 @@
   ...
 }:
 let
-  slam = inputs.slam {
+  slam = "${inputs.slam}/." {
     inherit overlays altOverlays;
   };
 
