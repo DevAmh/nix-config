@@ -7,7 +7,7 @@
   ...
 }:
 let
-  slam = "${inputs.slam}/default.nix" {
+  slam = import inputs.slam {
     inherit overlays altOverlays;
   };
 
