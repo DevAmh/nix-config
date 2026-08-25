@@ -9,7 +9,7 @@
 let
   slam = import inputs.slam {
     inherit overlays altOverlays;
-    system = pkgs.stdenv.hostPlatform.system;
+    system = "x86_64-linux";
   };
 
   inherit (slam) pkgs lib;
