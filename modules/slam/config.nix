@@ -122,7 +122,8 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/slam-x86_64";
+    #device = "/dev/disk/by-label/slam-x86_64";
+    device = "/dev/vda";
     fsType = "ext4";
   };
 
