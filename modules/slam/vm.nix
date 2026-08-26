@@ -7,11 +7,6 @@ let
     config.boot.kernelParams ++ [ "init=${config.system.build.toplevel}/init" ]
   );
 in {
-  options.virtualisation = {
-    memorySize = lib.mkOption { type = lib.types.int; default = 1024; };
-    cores      = lib.mkOption { type = lib.types.int; default = 2; };
-  };
-
   options.system.build.vm = lib.mkOption {
     type = lib.types.package;
     description = "A script to run the VM.";
