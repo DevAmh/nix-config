@@ -90,7 +90,7 @@ in
       };
     };
 
-    system.image.builds.extRoot = pkgs.callPackage ../../utils/make-ext2fs.nix {
+    system.image.builds.extRoot = pkgs.callPackage ./utils/make-ext2fs.nix {
       storeContents = config.system.image.store.contents;
       inherit (cfg.extRoot) label type;
     };
