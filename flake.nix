@@ -11,9 +11,6 @@
   };
 
   outputs = inputs: {
-    lib.slamSystem =
-      (import "${inputs.slam-images}/default.nix" {
-        slamSrc = inputs.slam;
-      }).evalSystem;
+    lib.slamSystem = import ./modules/slam {inherit inputs;};
   };
 }
