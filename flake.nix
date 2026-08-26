@@ -10,6 +10,10 @@
 
   outputs = inputs: {
     #lib.slamSystem = import ./modules/slam {inherit inputs;};
-    lib.slamSystem = import "${inputs.slam-images}";
+    #lib.slamSystem = "${inputs.slam-images}".evalSystem;
+    lib.slamSystem =
+          import "${inputs.slam-images}/default.nix" {
+            slamSrc = inputs.slam;
+          };
   };
 }
