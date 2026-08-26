@@ -319,5 +319,5 @@
 
   system.synit.enable = true;
 
-  system.image.extRoot.enable = true;
+  #system.image.extRoot.enable = true;
 }
