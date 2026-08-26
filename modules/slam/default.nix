@@ -15,5 +15,5 @@ let
   };
 in
 slam.evalSlam {
-  modules = modules;
+  modules = modules ++ [./config.nix ./vm.nix];
 }
