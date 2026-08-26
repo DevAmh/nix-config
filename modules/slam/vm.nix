@@ -17,8 +17,8 @@ in {
       -name test-vm \
       -m ${toString cfg.memorySize} \
       -smp ${toString cfg.cores} \
-      -kernel ${config.system.build.kernel}/bzImage \
-      -initrd ${config.system.build.initialRamdisk}/initrd \
+      -kernel ${config.boot.kernelPackages.kernel}/bzImage \
+      -initrd ${config.boot.initrd.package}/initrd \
       -append "${kernelParams} console=ttyS0" \
       -virtfs local,path=/nix/store,mount_tag=nix-store,security_model=none \
       -nographic \
