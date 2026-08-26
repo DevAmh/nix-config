@@ -8,9 +8,10 @@
   ...
 }:
 let
+  system = "x86_64-linux";
+
   slam = import inputs.slam {
-    inherit overlays altOverlays;
-    system = "x86_64-linux";
+    inherit overlays altOverlays system;
   };
 in
 slam.evalSlam {
