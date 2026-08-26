@@ -12,6 +12,11 @@ in {
     cores      = lib.mkOption { type = lib.types.int; default = 2; };
   };
 
+  options.system.build.vm = lib.mkOption {
+    type = lib.types.package;
+    description = "A script to run the VM.";
+  };
+
   config.system.build.vm = pkgs.writeShellScriptBin "run-vm" ''
     exec ${pkgs.qemu_kvm}/bin/qemu-system-x86_64 \
       -name test-vm \
