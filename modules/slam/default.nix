@@ -17,7 +17,7 @@ let
 in
 slam.evalSlam {
   modules = modules ++ [
-    #./system/rebuild.nix
+    ./system/rebuild.nix
     ./config.nix #./vm.nix ./mutable.nix
   ];
 }
