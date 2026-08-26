@@ -13,8 +13,15 @@ let
   };
 
   inherit (slam) pkgs lib;
+
+  nixpkgsConfigShim = { lib, ... }: {
+    options.nixpkgs.config = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+    };
+  };
 in
 slam.evalSlam {
-  modules = modules;
+  modules = modules ++ [nixpkgsConfigShim];
   specialArgs = specialArgs;
 }
