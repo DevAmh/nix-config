@@ -3,15 +3,16 @@
   lib ? null,
   specialArgs ? { },
   modules ? [ ],
-  overlays ? [ ],
-  altOverlays ? [ ],
+ # overlays ? [ ],
+ #altOverlays ? [ ],
   ...
 }:
 let
   system = "x86_64-linux";
 
   slam = import inputs.slam {
-    inherit overlays altOverlays system;
+    #inherit overlays altOverlays
+    inherit system;
   };
 in
 slam.evalSlam {
