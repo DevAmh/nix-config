@@ -8,6 +8,12 @@ let
     ]
   );
 in {
+  options.system.build.vm = lib.mkOption {
+    type = lib.types.package;
+    description = "A script to run the VM.";
+  };
+
+
   config.system.build.vm = pkgs.writeShellScriptBin "run-vm" ''
     set -e
     workdir=$(mktemp -d)
