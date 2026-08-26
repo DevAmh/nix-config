@@ -1,39 +1,17 @@
-# vm.nix
 { config, lib, pkgs, ... }:
 let
   cfg = config.virtualisation;
   kernelParams = lib.concatStringsSep " " (
-    config.boot.kernelParams ++ [ "init=${config.system.build.toplevel}/init" ]
+    config.boot.kernelParams ++ [
+      "init=${config.system.build.toplevel}/scripts/init"  # Correct path for SLAM
+      "console=ttyS0"
+    ]
   );
-
-  # Whole-disk ext4 image for "/", no partition table —
-  # matches fileSystems."/".device = "/dev/vda" directly.
-  rootImage = pkgs.runCommand "root.img" {
-    nativeBuildInputs = [ pkgs.e2fsprogs pkgs.perl ];
-  } ''
-    truncate -s 4G $out
-    mkfs.ext4 -F $out
-  '';
-
-  # FAT-formatted image labeled EFIBOOT for "/boot".
-  bootImage = pkgs.runCommand "boot.img" {
-    nativeBuildInputs = [ pkgs.dosfstools ];
-  } ''
-    truncate -s 256M $out
-    mkfs.vfat -F 32 -n EFIBOOT $out
-  '';
 in {
-  options.system.build.vm = lib.mkOption {
-    type = lib.types.package;
-    description = "A script to run the VM.";
-  };
-
   config.system.build.vm = pkgs.writeShellScriptBin "run-vm" ''
     set -e
-    # copy images somewhere writable since the store paths are read-only
     workdir=$(mktemp -d)
-    cp ${rootImage} "$workdir/root.img"
-    cp ${bootImage} "$workdir/boot.img"
+    cp ${config.system.image.builds.extRoot.out} "$workdir/root.img"
     chmod +w "$workdir"/*.img
 
     exec ${pkgs.qemu_kvm}/bin/qemu-system-x86_64 \
@@ -42,10 +20,8 @@ in {
       -smp ${toString cfg.cores} \
       -kernel ${config.boot.kernelPackages.kernel}/bzImage \
       -initrd ${config.boot.initrd.package}/initrd \
-      -append "${kernelParams} console=ttyS0" \
+      -append "${kernelParams}" \
       -drive file="$workdir/root.img",if=virtio,format=raw \
-      -drive file="$workdir/boot.img",if=virtio,format=raw \
-      -virtfs local,path=/nix/store,mount_tag=nix-store,security_model=none \
       -nographic \
       -enable-kvm \
       "$@"

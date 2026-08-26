@@ -122,8 +122,7 @@
   };
 
   fileSystems."/" = {
-    #device = "/dev/disk/by-label/slam-x86_64";
-    device = "/dev/vda";
+    device = "/dev/disk/by-label/slam-x86_64";
     fsType = "ext4";
   };
 
@@ -134,6 +133,7 @@
       "dmask=0022"
     ];
   };
+
 
   # Include support for various filesystems and tools to create / manipulate them.
   boot.supportedFilesystems =
@@ -319,5 +319,5 @@
 
   system.synit.enable = true;
 
-  #system.image.extRoot.enable = true;
+  system.image.extRoot.enable = true;
 }
