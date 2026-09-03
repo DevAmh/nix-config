@@ -10,7 +10,19 @@
     slam-images.flake = false;
   };
 
-  outputs = inputs: {
-    lib.slamSystem = import ./modules/slam {inherit inputs;};
-  };
+  outputs = inputs: let
+    system = "x86_64-linux";
+  in rec {
+     lib.slamSystem = import ./modules/slam {
+       inherit inputs;
+     };
+
+     nixosConfigurations.slam = lib.slamSystem {
+       modules = [
+         ./configuration.nix
+         ./modules/slam/activation/rebuild.nix
+       ];
+       specialArgs = {inherit inputs;};
+     };
+   };
 }

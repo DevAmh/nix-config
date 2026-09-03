@@ -1,0 +1,60 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1788179007,
+        "narHash": "sha256-hn1oU2rue2SYK8dAr8+WNZWtbsz1S2W5mnHlSEuh3bo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "34ab99075ac4f7e40cf037eef32cb1c360bb85e9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "slam": "slam",
+        "slam-images": "slam-images"
+      }
+    },
+    "slam": {
+      "locked": {
+        "lastModified": 1787702400,
+        "narHash": "sha256-iCWW7k58+F3x7vThOEJetaGmThVGNHORXNn7mjE3Hhk=",
+        "ref": "refs/heads/trunk",
+        "rev": "0b22753bfff1a80e69a92669fb8479e63703fcab",
+        "revCount": 656,
+        "type": "git",
+        "url": "https://git.informatics.coop/nix/slam"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.informatics.coop/nix/slam"
+      }
+    },
+    "slam-images": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786406400,
+        "narHash": "sha256-tA5Heq+4x9x7MqVBEQ20DiJgpv+MCUDFGWFhb1xMu8Q=",
+        "ref": "refs/heads/trunk",
+        "rev": "3e1801e07096014b1bc8bbd51c7b0220bbc6c254",
+        "revCount": 16,
+        "type": "git",
+        "url": "https://git.informatics.coop/nix/slam-images"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.informatics.coop/nix/slam-images"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
